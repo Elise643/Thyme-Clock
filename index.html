@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Thyme Clock</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&display=swap');
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #000;
+    overflow: hidden;
+  }
+
+  .container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #clock {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'EB Garamond', 'Georgia', serif;
+    font-size: 13vw;
+    font-weight: 600;
+    color: #fff;
+    -webkit-text-stroke: 2px #6b8e6b;
+    text-shadow:
+      0 0 20px rgba(0,0,0,0.8),
+      0 0 40px rgba(0,0,0,0.6),
+      2px 2px 4px rgba(0,0,0,0.9);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <img src="thyme.jpg" alt="Thyme">
+  <div id="clock">00:00:00</div>
+</div>
+
+<script>
+  function updateClock() {
+    const now = new Date();
+    let h = now.getHours();
+    const m = String(now.getMinutes()).padStart(2, '0');
+    const s = String(now.getSeconds()).padStart(2, '0');
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12;
+    h = h === 0 ? 12 : h;
+    document.getElementById('clock').textContent = `${h}:${m}:${s} ${ampm}`;
+  }
+
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
+
+</body>
+</html>
